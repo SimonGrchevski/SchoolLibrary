@@ -1,4 +1,4 @@
-require './corrector.rb'
+require './corrector'
 
 class Person
   attr_accessor :name, :age
