@@ -50,5 +50,5 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
-  Naming/PredicateName:
+Naming/PredicateName:
     Enabled: false
