@@ -9,15 +9,4 @@ class Student < Person
   def play_hookey
     '¯\(ツ)/¯'
   end
-
-  def classroom
-    @classroom
-  end
-
-  def info
-    puts "name: $#{@name} age: $#{age}"
-  end
 end
-
-student = Student.new(13, 33)
-puts student.classroom
