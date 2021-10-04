@@ -1,8 +1,10 @@
-require './person.rb'
+# frozen_string_literal: true
 
-class Teacher < Person  
-  def initialize(age, specialization, name="unknown")
-    super(age,name)
+require './person'
+
+class Teacher < Person
+  def initialize(age, specialization, name = 'unknown')
+    super(age, name)
     @specialization = specialization
   end
 
