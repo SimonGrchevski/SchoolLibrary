@@ -10,6 +10,7 @@ class Person
     @parent_permission = parent_permission
     @id = Random.rand(0..5000)
     @corrector = Corrector.new
+    @rentals = []
   end
 
   def of_age?
@@ -22,5 +23,9 @@ class Person
 
   def validate_name
     @name = @corrector.correct_name(@name)
+  end
+  def add_rental(rental)
+    @rentals.push(rental)
+    rental.person = self
   end
 end
