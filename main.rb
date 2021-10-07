@@ -23,6 +23,7 @@ def print_options
 end
 
 def create_book
+  system 'clear'
   puts 'Enter the title of the book'
   title = gets.chomp
   puts 'Enter the author of the book'
@@ -39,6 +40,7 @@ def create_teacher
   age = gets.chomp
   puts 'Enter the specialization'
   spec = gets.chomp
+  puts 'Teacher created successfully'
   Teacher.new(age, spec, name)
 end
 
@@ -111,6 +113,7 @@ def get_date
 end
 
 def create_rental(books, people)
+  system 'clear'
   book = get_book_for_rental(books)
   person = get_person_that_rents(people)
   date = get_date
@@ -124,6 +127,7 @@ def get_id
 end
 
 def list_rentals(rentals)
+  system 'clear'
   id = get_id
   rentals.each do |rent|
     if( rent.person.id === id)
