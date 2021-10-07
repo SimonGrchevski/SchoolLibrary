@@ -3,13 +3,13 @@ require './teacher'
 require './student'
 require './rental'
 
-LIST_ALL_BOOKS_CODE = '0'.freeze
-LIST_ALL_PEOPLE_CODE = '1'.freeze
-CREATE_A_PERSON_CODE = '2'.freeze
-CREATE_A_BOOK_CODE = '3'.freeze
-CREATE_A_RENTAL_CODE = '4'.freeze
-LIST_ALL_RENTALS_CODE = '5'.freeze
-EXIT_CODE = '6'.freeze
+LIST_ALL_BOOKS_CODE = '1'.freeze
+LIST_ALL_PEOPLE_CODE = '2'.freeze
+CREATE_A_PERSON_CODE = '3'.freeze
+CREATE_A_BOOK_CODE = '4'.freeze
+CREATE_A_RENTAL_CODE = '5'.freeze
+LIST_ALL_RENTALS_CODE = '6'.freeze
+EXIT_CODE = '7'.freeze
 
 
 def print_options
@@ -31,7 +31,8 @@ def create_book
   Book.new(title, author)
 end
 
-def create_teacher 
+def create_teacher
+  system 'clear'
   puts 'Enter the name of the teacher'
   name = gets.chomp
   puts 'Enter the age of the teacher'
@@ -42,6 +43,7 @@ def create_teacher
 end
 
 def create_student
+  system 'clear'
   puts 'Enter the name of the student'
   name = gets.chomp
   puts 'Enter the age of the student'
@@ -52,9 +54,10 @@ def create_student
 end
 
 def create_person 
-  teacher = '0'
-  student = '1'
+  teacher = '1'
+  student = '2'
   loop do
+    system 'clear'
     puts "#{teacher}) To create teacher"
     puts "#{student}) To create student"
     case gets.chomp
@@ -137,7 +140,7 @@ def main
     print_options
     case gets.chomp
     when LIST_ALL_BOOKS_CODE
-      books.each {|book| puts book.title; puts book.author}
+      books.each {|book| puts book.info }
     when LIST_ALL_PEOPLE_CODE
       people.each { |pep| puts pep.info }
     when CREATE_A_PERSON_CODE
@@ -149,7 +152,7 @@ def main
     when LIST_ALL_RENTALS_CODE
       list_rentals(rentals)
     else 
-      puts 'END'
+      puts 'Thank you for using this app.'
       return
     end
   end

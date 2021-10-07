@@ -14,6 +14,6 @@ class Book
   end
 
   def info
-    "#{@title} #{@author}"
+    "Title: #{@title} by: #{@author}"
   end
 end
