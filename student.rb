@@ -3,14 +3,17 @@ require './person'
 class Student < Person
   attr_reader :classroom
 
-  def initialize(age, name = 'unknown', parent_permission: true)
+  def initialize(age, name = 'unknown', parent_permission= true)
     super(age, name, parent_permission)
-    classroom.students.push(self)
   end
 
   def classroom=(classroom)
     @classroom = classroom
     classroom.students.push(self)
+  end
+
+  def print_info
+    puts "[Student] Name: #{@name} ID: #{@id} Age: #{@age}"
   end
 
   def play_hookey

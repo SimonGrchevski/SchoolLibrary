@@ -9,4 +9,9 @@ class Teacher < Person
   def can_use_services?
     @parent_permission
   end
+
+  def print_info
+    puts "[Teacher] Name: #{@name} ID: #{@id} Age: #{@age}"
+  end
+  
 end
