@@ -11,11 +11,15 @@ class Rental
 
   def book=(book)
     @book = book
-    #book.rentals = self
+    book.rentals = self
   end
 
   def person=(person)
     @person = person
     person.rentals = self
+  end
+
+  def info
+    "Date #{@date}, #{book.info}"
   end
 end

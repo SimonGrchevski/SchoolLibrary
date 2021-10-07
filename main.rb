@@ -78,7 +78,7 @@ def get_book_for_rental( books )
     book = gets.chomp.to_i
     case book
     when 0..books.size
-        return books[book]
+      return books[book]
     else 
       puts 'That book does not exist'
     end
@@ -107,11 +107,26 @@ def get_date
   gets.chomp
 end
 
-def create_rental( books, people )
+def create_rental(books, people)
   book = get_book_for_rental(books)
   person = get_person_that_rents(people)
   date = get_date
+  puts 'Rental created successfully'
   Rental.new(date, book, person)
+end
+
+def get_id
+  puts 'ID of person'
+  gets.chomp.to_i
+end
+
+def list_rentals(rentals)
+  id = get_id
+  rentals.each do |rent|
+    if( rent.person.id === id)
+      puts rent.info
+    end
+  end
 end
 
 def main
@@ -130,10 +145,12 @@ def main
     when CREATE_A_BOOK_CODE
       books.push(create_book)
     when CREATE_A_RENTAL_CODE
-      rentals.push( create_rental(books,people))
+      rentals.push(create_rental(books, people))
     when LIST_ALL_RENTALS_CODE
-      puts 'LIST ALL BOOKS'
-    else puts 'END'
+      list_rentals(rentals)
+    else 
+      puts 'END'
+      return
     end
   end
 end

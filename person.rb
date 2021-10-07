@@ -13,10 +13,6 @@ class Person
     @rentals = []
   end
 
-  def of_age?
-    age >= 18
-  end
-
   def can_use_services?
     is_of_age? || @parent_permission
   end
@@ -28,5 +24,15 @@ class Person
   def rentals=(rental)
     @rentals.push(rental)
     rental.person = self
+  end
+
+  def print_rentals 
+    rentals.each {|rent| puts rent.info}
+  end
+  
+  private 
+
+  def of_age?
+    age >= 18
   end
 end
