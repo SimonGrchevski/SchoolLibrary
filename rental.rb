@@ -5,13 +5,13 @@ class Rental
   def initialize(date, book, person)
     @date = date
 
-    self.book = book
-    self.person = person
+    @book = book
+    @person = person
   end
 
   def book=(book)
     @book = book
-    book.rentals = self
+    #book.rentals = self
   end
 
   def person=(person)

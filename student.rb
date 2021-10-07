@@ -12,8 +12,8 @@ class Student < Person
     classroom.students.push(self)
   end
 
-  def print_info
-    puts "[Student] Name: #{@name} ID: #{@id} Age: #{@age}"
+  def info
+    "[Student] Name: #{@name} ID: #{@id} Age: #{@age}"
   end
 
   def play_hookey

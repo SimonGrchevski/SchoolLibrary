@@ -10,8 +10,8 @@ class Teacher < Person
     @parent_permission
   end
 
-  def print_info
-    puts "[Teacher] Name: #{@name} ID: #{@id} Age: #{@age}"
+  def info
+    "[Teacher] Name: #{@name} ID: #{@id} Age: #{@age}"
   end
-  
+
 end

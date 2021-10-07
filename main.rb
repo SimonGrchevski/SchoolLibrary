@@ -1,7 +1,7 @@
 require './book'
 require './teacher'
 require './student'
-
+require './rental'
 
 LIST_ALL_BOOKS_CODE = '0'.freeze
 LIST_ALL_PEOPLE_CODE = '1'.freeze
@@ -68,6 +68,52 @@ def create_person
   end
 end
 
+def get_book_for_rental( books )
+  loop do 
+    puts 'Select a Book from the following list by number '
+      books.each_with_index do |book, i|
+        puts "#{i}) #{book.info}"
+      end
+
+    book = gets.chomp.to_i
+    case book
+    when 0..books.size
+        return books[book]
+    else 
+      puts 'That book does not exist'
+    end
+  end
+end
+
+def get_person_that_rents(people)
+loop do 
+    puts 'Select a person from the following list by number '
+      people.each_with_index do |person, i|
+        puts "#{i}) #{person.info}"
+      end
+
+    person = gets.chomp.to_i
+    case person
+    when 0..people.size
+        return people[person]
+    else 
+      puts 'That person does not exist'
+    end
+  end
+end
+
+def get_date 
+  puts 'Enter the date of the rental'
+  gets.chomp
+end
+
+def create_rental( books, people )
+  book = get_book_for_rental(books)
+  person = get_person_that_rents(people)
+  date = get_date
+  Rental.new(date, book, person)
+end
+
 def main
   books = []
   people = []
@@ -78,15 +124,13 @@ def main
     when LIST_ALL_BOOKS_CODE
       books.each {|book| puts book.title; puts book.author}
     when LIST_ALL_PEOPLE_CODE
-      people.each do |pep|
-        pep.print_info
-      end
+      people.each { |pep| puts pep.info }
     when CREATE_A_PERSON_CODE
       people.push(create_person)
     when CREATE_A_BOOK_CODE
       books.push(create_book)
     when CREATE_A_RENTAL_CODE
-      puts 'LIST ALL BOOKS'
+      rentals.push( create_rental(books,people))
     when LIST_ALL_RENTALS_CODE
       puts 'LIST ALL BOOKS'
     else puts 'END'
