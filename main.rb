@@ -11,7 +11,6 @@ CREATE_A_RENTAL_CODE = '5'.freeze
 LIST_ALL_RENTALS_CODE = '6'.freeze
 EXIT_CODE = '7'.freeze
 
-
 def print_options
   puts "#{LIST_ALL_BOOKS_CODE}) List all books"
   puts "#{LIST_ALL_PEOPLE_CODE}) List all people"
@@ -55,7 +54,7 @@ def create_student
   Student.new(age, name, permission.upcase.match?('Y'))
 end
 
-def create_person 
+def create_person
   teacher = '1'
   student = '2'
   loop do
@@ -73,41 +72,41 @@ def create_person
   end
 end
 
-def get_book_for_rental( books )
-  loop do 
+def get_book_for_rental(books)
+  loop do
     puts 'Select a Book from the following list by number '
-      books.each_with_index do |book, i|
-        puts "#{i}) #{book.info}"
-      end
+    books.each_with_index do |book, i|
+      puts "#{i}) #{book.info}"
+    end
 
     book = gets.chomp.to_i
     case book
     when 0..books.size
       return books[book]
-    else 
+    else
       puts 'That book does not exist'
     end
   end
 end
 
 def get_person_that_rents(people)
-loop do 
+  loop do
     puts 'Select a person from the following list by number '
-      people.each_with_index do |person, i|
-        puts "#{i}) #{person.info}"
-      end
+    people.each_with_index do |person, i|
+      puts "#{i}) #{person.info}"
+    end
 
     person = gets.chomp.to_i
     case person
     when 0..people.size
-        return people[person]
-    else 
+      return people[person]
+    else
       puts 'That person does not exist'
     end
   end
 end
 
-def get_date 
+def get_date
   puts 'Enter the date of the rental'
   gets.chomp
 end
@@ -130,9 +129,7 @@ def list_rentals(rentals)
   system 'clear'
   id = get_id
   rentals.each do |rent|
-    if( rent.person.id === id)
-      puts rent.info
-    end
+    puts rent.info if rent.person.id === id
   end
 end
 
@@ -144,7 +141,7 @@ def main
     print_options
     case gets.chomp
     when LIST_ALL_BOOKS_CODE
-      books.each {|book| puts book.info }
+      books.each { |book| puts book.info }
     when LIST_ALL_PEOPLE_CODE
       people.each { |pep| puts pep.info }
     when CREATE_A_PERSON_CODE
@@ -155,11 +152,11 @@ def main
       rentals.push(create_rental(books, people))
     when LIST_ALL_RENTALS_CODE
       list_rentals(rentals)
-    else 
+    else
       puts 'Thank you for using this app.'
       return
     end
   end
 end
 
-main()
+main

@@ -13,5 +13,4 @@ class Teacher < Person
   def info
     "[Teacher] Name: #{@name} ID: #{@id} Age: #{@age}"
   end
-
 end
