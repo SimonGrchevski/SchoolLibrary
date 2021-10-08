@@ -1,11 +1,10 @@
-require './book'
-require './teacher'
-require './student'
-require './rental'
-require './person'
+require_relative './book'
+require_relative './teacher'
+require_relative './student'
+require_relative './rental'
+require_relative './person'
 
 class SchoolLibrary
-
   def initialize
     @books = []
     @people = []
@@ -20,9 +19,9 @@ class SchoolLibrary
       'List all rentals for a given person id',
       'Terminate'
     ]
-    @teacher = '1'.freeze
-    @student = '2'.freeze
-    @create_rental_failure = 'F'.freeze
+    @teacher = '1'
+    @student = '2'
+    @create_rental_failure = 'F'
     @EXIT_CODE = @options.size
     init_actions
   end
@@ -35,7 +34,7 @@ class SchoolLibrary
   end
 
   def print_options
-    @options.each_with_index { |o, i| puts "#{i+1} #{o}" }
+    @options.each_with_index { |o, i| puts "#{i + 1} #{o}" }
   end
 
   def list_all_books
@@ -103,7 +102,7 @@ class SchoolLibrary
         end
         book = gets.chomp.to_i
         case book
-        when 0..@books.size-1
+        when 0..@books.size - 1
           return @books[book]
         else
           puts 'That book does not exist, try again!'
@@ -123,7 +122,7 @@ class SchoolLibrary
 
         person = gets.chomp.to_i
         case person
-        when 0..@people.size-1
+        when 0..@people.size - 1
           return @people[person]
         else
           puts 'That person does not exist'
@@ -155,7 +154,7 @@ class SchoolLibrary
     gets.chomp.to_i
   end
 
-  def list_rentals()
+  def list_rentals
     id = get_id
     @rentals.each do |rent|
       puts rent.info if rent.person.id <=> id
@@ -177,11 +176,11 @@ class SchoolLibrary
     keep_running = true
     while keep_running
       print_options
-      user_inp = gets.chomp.to_i-1
+      user_inp = gets.chomp.to_i - 1
       case user_inp
       when 0..@actions.size - 1
         @actions[user_inp].call
-      when @EXIT_CODE.to_i-1
+      when @EXIT_CODE.to_i - 1
         keep_running = false
       end
     end
