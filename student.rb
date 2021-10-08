@@ -1,16 +1,21 @@
-require './person'
+require_relative './person'
 
 class Student < Person
   attr_reader :classroom
 
-  def initialize(age, name = 'unknown', parent_permission: true)
+  # rubocop:disable Style/OptionalBooleanParameter
+  def initialize(age, name = 'unknown', parent_permission = true)
     super(age, name, parent_permission)
-    classroom.students.push(self)
   end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   def classroom=(classroom)
     @classroom = classroom
     classroom.students.push(self)
+  end
+
+  def info
+    "[Student] Name: #{@name} ID: #{@id} Age: #{@age}"
   end
 
   def play_hookey
