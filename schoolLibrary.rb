@@ -2,6 +2,7 @@ require './book'
 require './teacher'
 require './student'
 require './rental'
+require './person'
 
 class SchoolLibrary
 
@@ -140,8 +141,7 @@ class SchoolLibrary
   def create_rental
     book = get_book_for_rental
     person = get_person_that_rents
-    if( book.match?(@create_rental_failure) ||
-        person.match?(@create_rental_failure))
+    unless book.is_a?(Book) && person.is_a?(Person)
       print_error(@create_rental_failure)
       return
     end
@@ -158,7 +158,7 @@ class SchoolLibrary
   def list_rentals()
     id = get_id
     @rentals.each do |rent|
-      puts rent.info if rent.person.id === id
+      puts rent.info if rent.person.id <=> id
     end
   end
 
@@ -175,17 +175,15 @@ class SchoolLibrary
 
   def run
     keep_running = true
-    while keep_running 
+    while keep_running
       print_options
       user_inp = gets.chomp.to_i-1
       case user_inp
       when 0..@actions.size - 1
         @actions[user_inp].call
-      when @@EXIT_CODE.to_i-1
+      when @EXIT_CODE.to_i-1
         keep_running = false
       end
     end
   end
 end
-
-SchoolLibrary.new.run
