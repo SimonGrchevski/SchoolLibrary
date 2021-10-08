@@ -1,4 +1,4 @@
-require_relative './schoolLibrary'
+require_relative './school_library'
 
 def main
   SchoolLibrary.new.run
