@@ -3,7 +3,7 @@ require_relative './teacher'
 require_relative './student'
 require_relative './rental'
 require_relative './person'
- # rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/ClassLength
 
 class SchoolLibrary
   def initialize
