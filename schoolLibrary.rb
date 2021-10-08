@@ -22,7 +22,7 @@ class SchoolLibrary
     @teacher = '1'
     @student = '2'
     @create_rental_failure = 'F'
-    @EXIT_CODE = @options.size
+    @exit_code = @options.size
     init_actions
   end
 
@@ -93,8 +93,8 @@ class SchoolLibrary
     end
   end
 
-  def get_book_for_rental
-    unless @books.size === 0
+  def book_for_rental
+    unless @books.size.eql? 0
       loop do
         puts 'Select a Book from the following list by number '
         @books.each_with_index do |book, i|
@@ -112,8 +112,8 @@ class SchoolLibrary
     @create_rental_failure
   end
 
-  def get_person_that_rents
-    unless @people.size === 0
+  def person_that_rents
+    unless @people.size.eql? 0
       loop do
         puts 'Select a person from the following list by number '
         @people.each_with_index do |person, i|
@@ -132,30 +132,30 @@ class SchoolLibrary
     @create_rental_failure
   end
 
-  def get_date
+  def ask_for_date
     puts 'Enter the date of the rental'
     gets.chomp
   end
 
   def create_rental
-    book = get_book_for_rental
-    person = get_person_that_rents
+    book = book_for_rental
+    person = person_that_rents
     unless book.is_a?(Book) && person.is_a?(Person)
       print_error(@create_rental_failure)
       return
     end
-    date = get_date
+    date = ask_for_date
     puts 'Rental created successfully'
     @rentals.push(Rental.new(date, book, person))
   end
 
-  def get_id
+  def id_from_user
     puts 'ID of person'
     gets.chomp.to_i
   end
 
   def list_rentals
-    id = get_id
+    id = id_from_user
     @rentals.each do |rent|
       puts rent.info if rent.person.id <=> id
     end
@@ -180,7 +180,7 @@ class SchoolLibrary
       case user_inp
       when 0..@actions.size - 1
         @actions[user_inp].call
-      when @EXIT_CODE.to_i - 1
+      when @exit_code.to_i - 1
         keep_running = false
       end
     end
