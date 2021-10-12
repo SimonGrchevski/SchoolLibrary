@@ -22,7 +22,7 @@ class Generate
     Teacher.new(age, spec, name)
   end
 
-  def student
+  def self.student
     puts 'Enter the name of the student'
     name = gets.chomp
     puts 'Enter the age of the student'

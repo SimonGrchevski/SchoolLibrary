@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 class Print
-  @@all_options = [
+  @all_options = [
     'List all books',
     'List all people',
     'Create a person',
@@ -11,11 +9,11 @@ class Print
     'Terminate'
   ]
   def self.options
-    @@all_options.each_with_index { |o, i| puts "#{i + 1} #{o}" }
+    @all_options.each_with_index { |o, i| puts "#{i + 1} #{o}" }
   end
 
   def self.options_size
-    @@all_options.size
+    @all_options.size
   end
 
   def self.entity_info(entity)
@@ -24,7 +22,7 @@ class Print
 
   def self.enitiy_info_if_id(entity, id)
     entity.each do |e|
-      puts e.info if e.person.id === id
+      puts e.info if e.person.id.eql? id
     end
   end
 

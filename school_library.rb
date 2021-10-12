@@ -38,7 +38,7 @@ class SchoolLibrary
   end
 
   def create_student
-    Student.new(Generate.student)
+    @people.push(Generate.student)
   end
 
   def create_person
