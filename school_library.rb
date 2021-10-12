@@ -114,7 +114,7 @@ class SchoolLibrary
 
   def list_rentals
     id = id_from_user
-    Print.enitiy_info_if_id(@rentals,id)
+    Print.enitiy_info_if_id(@rentals, id)
   end
 
   def init_actions

@@ -1,7 +1,7 @@
 require_relative './book'
 require_relative './print'
 
-class Generate 
+class Generate
   def self.book
     puts 'Enter the title of the book'
     title = gets.chomp

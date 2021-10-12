@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class Print
   @@all_options = [
-      'List all books',
-      'List all people',
-      'Create a person',
-      'Create a book',
-      'Create a rental',
-      'List all rentals for a given person id',
-      'Terminate'
-    ]
-  def self.options 
+    'List all books',
+    'List all people',
+    'Create a person',
+    'Create a book',
+    'Create a rental',
+    'List all rentals for a given person id',
+    'Terminate'
+  ]
+  def self.options
     @@all_options.each_with_index { |o, i| puts "#{i + 1} #{o}" }
   end
 
@@ -20,7 +22,7 @@ class Print
     entity.each { |e| puts e.info }
   end
 
-  def self.enitiy_info_if_id(entity,id)
+  def self.enitiy_info_if_id(entity, id)
     entity.each do |e|
       puts e.info if e.person.id === id
     end
@@ -39,5 +41,4 @@ class Print
   def self.success(succ)
     puts succ
   end
-
 end
