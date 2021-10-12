@@ -1,10 +1,8 @@
-require_relative './book'
 require_relative './teacher'
 require_relative './student'
 require_relative './rental'
 require_relative './person'
-require_relative './print'
-# rubocop:disable Metrics/ClassLength
+require_relative './generate'
 
 class SchoolLibrary
   def initialize
@@ -32,36 +30,15 @@ class SchoolLibrary
   end
 
   def create_book
-    puts 'Enter the title of the book'
-    title = gets.chomp
-    puts 'Enter the author of the book'
-    author = gets.chomp
-    Print.success('Book created successfully')
-    @books.push(Book.new(title, author))
+    @books.push(Generate.book)
   end
 
   def create_teacher
-    puts 'Enter the name of the teacher'
-    name = gets.chomp
-    puts 'Enter the age of the teacher'
-    age = gets.chomp
-    puts 'Enter the specialization'
-    spec = gets.chomp
-    Print.success('Teacher created successfully')
-    @people.push(Teacher.new(age, spec, name))
+    @people.push(Generate.teacher)
   end
 
   def create_student
-    puts 'Enter the name of the student'
-    name = gets.chomp
-    puts 'Enter the age of the student'
-    age = gets.chomp
-    puts 'Has a parent permission [Y/N]'
-    permission = gets.chomp
-    Print.success('Student created successfully')
-    @people.push(
-      Student.new(age, name, permission.upcase.match?('Y'))
-    )
+    Student.new(Generate.student)
   end
 
   def create_person
@@ -87,8 +64,7 @@ class SchoolLibrary
         Print.entity_with_index(@books)
         book = gets.chomp.to_i
         case book
-        when 0..@books.size - 1
-          return @books[book]
+        when 0..@books.size - 1 then return @books[book]
         else
           Print.error('That book does not exist, try again!')
         end
@@ -166,4 +142,3 @@ class SchoolLibrary
     end
   end
 end
-# rubocop:enable Metrics/ClassLength
