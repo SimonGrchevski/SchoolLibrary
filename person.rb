@@ -3,7 +3,7 @@ require_relative './corrector'
 class Person
   attr_accessor :name, :age
   attr_reader :id, :rentals
-  
+
   # rubocop:disable Style/OptionalBooleanParameter
   def initialize(age, name = 'unknown', parent_permission = true)
     @age = age
