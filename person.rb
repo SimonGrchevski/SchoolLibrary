@@ -13,7 +13,6 @@ class Person
     @corrector = Corrector.new
     @rentals = []
   end
-  # rubocop:enable Style/OptionalBooleanParameter
 
   def can_use_services?
     is_of_age? || @parent_permission
@@ -38,3 +37,4 @@ class Person
     age >= 18
   end
 end
+# rubocop:enable Style/OptionalBooleanParameter

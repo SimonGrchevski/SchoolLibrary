@@ -7,7 +7,6 @@ class Student < Person
   def initialize(age, name = 'unknown', parent_permission = true)
     super(age, name, parent_permission)
   end
-  # rubocop:enable Style/OptionalBooleanParameter
 
   def classroom=(classroom)
     @classroom = classroom
@@ -22,3 +21,4 @@ class Student < Person
     '¯\(ツ)/¯'
   end
 end
+# rubocop:enable Style/OptionalBooleanParameter
