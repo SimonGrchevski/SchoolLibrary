@@ -4,8 +4,7 @@ class Person
   attr_accessor :name, :age
   attr_reader :id, :rentals
 
-  # rubocop:disable Style/OptionalBooleanParameter
-  def initialize(age, name = 'unknown', parent_permission = true)
+  def initialize(age , name = 'unknown', parent_permission = true)
     @age = age
     @name = name
     @parent_permission = parent_permission
@@ -13,7 +12,6 @@ class Person
     @corrector = Corrector.new
     @rentals = []
   end
-  # rubocop:enable Style/OptionalBooleanParameter
 
   def can_use_services?
     is_of_age? || @parent_permission

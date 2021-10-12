@@ -3,6 +3,7 @@ require_relative './teacher'
 require_relative './student'
 require_relative './rental'
 require_relative './person'
+require_relative './print'
 # rubocop:disable Metrics/ClassLength
 
 class SchoolLibrary
@@ -11,39 +12,23 @@ class SchoolLibrary
     @people = []
     @rentals = []
     @actions = []
-    @options = [
-      'List all books',
-      'List all people',
-      'Create a person',
-      'Create a book',
-      'Create a rental',
-      'List all rentals for a given person id',
-      'Terminate'
-    ]
     @teacher = '1'
     @student = '2'
     @create_rental_failure = 'F'
-    @exit_code = @options.size
+    @exit_code = Print.options_size
     init_actions
   end
 
-  def print_error(err)
-    case err
-    when @create_rental_failure
-      puts 'Err: There isnt any book or person!'
-    end
-  end
-
   def print_options
-    @options.each_with_index { |o, i| puts "#{i + 1} #{o}" }
+    Print.options
   end
 
   def list_all_books
-    @books.each { |book| puts book.info }
+    Print.entity_info(@books)
   end
 
   def list_all_people
-    @people.each { |person| puts person.info }
+    Print.entity_info(@people)
   end
 
   def create_book
@@ -51,7 +36,7 @@ class SchoolLibrary
     title = gets.chomp
     puts 'Enter the author of the book'
     author = gets.chomp
-    puts 'Book created successfully'
+    Print.success('Book created successfully')
     @books.push(Book.new(title, author))
   end
 
@@ -62,7 +47,7 @@ class SchoolLibrary
     age = gets.chomp
     puts 'Enter the specialization'
     spec = gets.chomp
-    puts 'Teacher created successfully'
+    Print.success('Teacher created successfully')
     @people.push(Teacher.new(age, spec, name))
   end
 
@@ -73,6 +58,7 @@ class SchoolLibrary
     age = gets.chomp
     puts 'Has a parent permission [Y/N]'
     permission = gets.chomp
+    Print.success('Student created successfully')
     @people.push(
       Student.new(age, name, permission.upcase.match?('Y'))
     )
@@ -89,7 +75,7 @@ class SchoolLibrary
       when @student
         return create_student
       else
-        puts 'Wrong input,try again!'
+        Print.error('Wrong input,try again!')
       end
     end
   end
@@ -98,15 +84,13 @@ class SchoolLibrary
     unless @books.size.eql? 0
       loop do
         puts 'Select a Book from the following list by number '
-        @books.each_with_index do |book, i|
-          puts "#{i}) #{book.info}"
-        end
+        Print.entity_with_index(@books)
         book = gets.chomp.to_i
         case book
         when 0..@books.size - 1
           return @books[book]
         else
-          puts 'That book does not exist, try again!'
+          Print.error('That book does not exist, try again!')
         end
       end
     end
@@ -117,16 +101,13 @@ class SchoolLibrary
     unless @people.size.eql? 0
       loop do
         puts 'Select a person from the following list by number '
-        @people.each_with_index do |person, i|
-          puts "#{i}) #{person.info}"
-        end
-
+        Print.entity_with_index(@people)
         person = gets.chomp.to_i
         case person
         when 0..@people.size - 1
           return @people[person]
         else
-          puts 'That person does not exist'
+          Print.error('That person does not exist')
         end
       end
     end
@@ -142,11 +123,11 @@ class SchoolLibrary
     book = book_for_rental
     person = person_that_rents
     unless book.is_a?(Book) && person.is_a?(Person)
-      print_error(@create_rental_failure)
+      Print.error('Err: There isnt any book or person!')
       return
     end
     date = ask_for_date
-    puts 'Rental created successfully'
+    Print.success('Rental created successfully')
     @rentals.push(Rental.new(date, book, person))
   end
 
@@ -157,9 +138,7 @@ class SchoolLibrary
 
   def list_rentals
     id = id_from_user
-    @rentals.each do |rent|
-      puts rent.info if rent.person.id <=> id
-    end
+    Print.enitiy_info_if_id(@rentals,id)
   end
 
   def init_actions
